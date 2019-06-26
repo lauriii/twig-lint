@@ -151,6 +151,10 @@ EOF
     )
     {
         try {
+            set_error_handler(function ($errno, $errstr) {
+                var_dump($errstr);
+            }, E_USER_DEPRECATED);
+
             $twig->parse($twig->tokenize($template, $file ? (string) $file : null));
             if (false === $onlyPrintErrors) {
                 $output->ok($template, $file);
